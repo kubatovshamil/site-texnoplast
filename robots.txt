@@ -1,0 +1,27 @@
+User-agent: Yandex
+Disallow: *utm=*
+Disallow: *openstat=*
+Disallow: /assets/
+Disallow: /?
+Allow: *.css
+Allow: *.js
+
+Host: https://texnoplastik.ru/
+
+User-agent: GoogleBot
+Disallow: *utm=*
+Disallow: *openstat=*
+Disallow: /assets/
+Disallow: /?
+Allow: *.css
+Allow: *.js
+
+User-agent: *
+Disallow: *utm=*
+Disallow: *openstat=*
+Disallow: /assets/
+Disallow: /?
+Allow: *.css
+Allow: *.js
+
+Sitemap: https://texnoplastik.ru/sitemap.xml
