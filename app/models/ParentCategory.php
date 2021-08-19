@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace app\models;
 
@@ -11,24 +11,24 @@ class ParentCategory extends AppModel{
 
 	/**
      * @return Array
-     */
+  */
 	public static function getCategories(){
 		return \R::getAll(self::GETCATEGORIES);
 	}
 
 	/**
      * @return Object
-     */
+  */
 	public static function getLikeName(String $name){
 		return \R::findOne('parent_category', self::LIKE_NAME, ["$name"]);
 	}
 	/**
      * @return Object
-     */
+  */
 	public static function getCategoryById(String $id){
 		return \R::findOne('parent_category',self::BY_PARENT_LINK, [$id]);
 	}
 
-	
+
 
 }

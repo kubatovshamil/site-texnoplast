@@ -13,7 +13,7 @@ class MainController extends AppController {
         $product = Product::getAllById();
 
         $shares = Product::getShareById();
-        
+
         $this->set(compact('product','shares'));
 
     }
@@ -39,7 +39,7 @@ class MainController extends AppController {
      	   	}
      	   	else {
              $products = Product::getByLikeTitle($q);
-             $this->set(compact('products'));            
+             $this->set(compact('products'));
             }
         }
     }

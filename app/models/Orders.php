@@ -1,9 +1,7 @@
-<?php 
+<?php
 
 namespace app\models;
 
-class Orders extends AppModel{
-
-	
+class Orders extends AppModel
 
 }
