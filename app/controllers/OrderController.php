@@ -8,10 +8,29 @@ use PHPMailer\PHPMailer\SMTP;
 
 class OrderController extends AppController {
 
+
+    public function setOrder($order){
+      $order->fullname = $fullname;
+      $order->phone = $phone;
+      $order->email = $email;
+      $order->country = $country;
+      $order->zipcode = $index;
+      $order->city = $city;
+      $order->street = $street;
+      $order->building = $building;
+      $order->room = $room;
+      if(!empty($address)){
+      $order->address = $address;
+      }
+      $order->sum = $_SESSION['totalSum'];
+      $order->date = $data;
+      \R::store($order);
+    }
+
     public function sendAction(){
         if(empty($_SESSION['cart'])){
             header("Location: /");
-            exit();
+            die();
         }
 
         $fullname = $_POST['fullname'];
@@ -24,24 +43,10 @@ class OrderController extends AppController {
         $delivery = $_POST['delivery'];
         $building = $_POST['building'];
         $room = $_POST['room'];
-
         $data = date('Y-m-d h:i:s');
         $order = \R::dispense('orders');
-        $order->fullname = $fullname;
-        $order->phone = $phone;
-        $order->email = $email;
-        $order->country = $country;
-        $order->zipcode = $index;
-        $order->city = $city;
-        $order->street = $street;
-        $order->building = $building;
-        $order->room = $room;
-        if(!empty($address)){
-        $order->address = $address;
-        }
-        $order->sum = $_SESSION['totalSum'];
-        $order->date = $data;
-        \R::store($order);
+        $this->setOrder($order);
+
         $order_id = \R::findOne('orders', 'fullname = ? and phone = ? and email = ? and date = ?',[$fullname, $phone, $email, $data]);
         \R::ext('xdispence', function ($table_name){
             return \R::getRedBean()->dispense($table_name);
