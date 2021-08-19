@@ -58,18 +58,18 @@ class OrderController extends AppController {
             $order_product->sum = 1000;;
             \R::store($order_product);
         }
-        
+
         $mail = new PHPMailer(true);
 
             $mail->isSMTP();
             $mail->Host       = 'smtp.mail.ru';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'shamil.kubatov@mail.ru';
-            $mail->Password   = 'loloshka0989';
+            $mail->Username   = 'your_mail@mail.ru';
+            $mail->Password   = 'your_pw';
             $mail->SMTPSecure = 'ssl';
             $mail->Port       = 465;
-            $mail->setFrom('shamil.kubatov@mail.ru');
-            $mail->addAddress('shamil.kubatov@mail.ru');
+            $mail->setFrom('your_mail@mail.ru');
+            $mail->addAddress('your_mail@mail.ru');
 
             $mail->isHTML(true);
             ob_start();
