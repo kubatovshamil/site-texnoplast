@@ -1,39 +1,38 @@
 <?php
-
-
 namespace app\controllers;
 
+use app\models\Product;
+use app\models\Category;
 
 class CartController extends AppController {
 
     public function productAction(){
-    
-        
-        $id = key($_GET);
-        
-        
-        $id = trim(str_replace("product/","",$id));
-        $product =  \R::find('product','product_link = ?', [$id]);
-        $this->set(compact('product'));
-    
-        $id = 0;
-        foreach($product as $item){
-            $id = $item->id;
-            
-        }
-        $cat_id = $product[$id]['category_id'];
-        $category = \R::findOne('category','id = ?', [$cat_id]);
-        if($category){
-            $this->setMeta("Технопластик - товар", $category->content, $category->keywords);
+        $id = preg_replace("#(([A-Za-z0-9\-\*]+)/)#", "", key($_GET)); 
+        if($product =  Product::getByLink($id)){
+            $this->setMetaProduct($product);
+            $this->set(compact('product'));
         }else{
             throw new \Exception("Нет такого товара",404);
+        }
+    }
+
+
+    public function setMetaProduct(Array $product){
+        $id = 0; 
+        foreach($product as $item){
+            $id = $item->id;
+        }
+        $cat_id = $product[$id]['category_id'];
+        $category = Category::getById($cat_id);
+        if($category){
+            $this->setMeta("Технопластик - товар", $category->content, $category->keywords);
         }
     }
 
     public function addAction(){
         $this->layout = 'empty';
         $id = $_GET['data'];
-        $valueInp = $_GET['value'];
+        $valueInp = (int) $_GET['value'];
         $product  = \R::findOne('product', 'id = ?',[$id]);
         $this->addToCart($product, $valueInp);
         $this->set(compact('product'));
@@ -54,8 +53,8 @@ class CartController extends AppController {
         $id = $_GET['id'];
         $value = $_GET['value'];
         if(isset($_SESSION['cart'][$id])){
-            @$_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
-            @$_SESSION['totalSum'] += $_SESSION['cart'][$id]['price'] * $value;
+            $_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
+            $_SESSION['totalSum'] += $_SESSION['cart'][$id]['price'] * $value;
             $_SESSION['total.Quantity'] -= $_SESSION['cart'][$id]['quantity'];
             $_SESSION['total.Quantity'] += $value;
             $_SESSION['cart'][$id]['quantity'] = $value;
@@ -64,6 +63,10 @@ class CartController extends AppController {
     }
 
     public function addToCart($product, $valueInp){
+        $product->price = (int) preg_replace("#[^\d]#", "", $product->price);
+        if(!$product->price){
+            $product->price = 0;
+        }
 
         if(isset($_SESSION['cart'][$product->id])){
             $_SESSION['cart'][$product->id]['quantity'] += $valueInp;
@@ -76,8 +79,9 @@ class CartController extends AppController {
                 'quantity' => $valueInp
             ];
         }
+
         $_SESSION['total.Quantity'] = isset($_SESSION['total.Quantity'])? $_SESSION['total.Quantity'] += $valueInp : $valueInp;
-        @$_SESSION['totalSum'] = isset($_SESSION['totalSum']) ? $_SESSION['totalSum'] + $product->price* $valueInp : $product->price * $valueInp;
+        $_SESSION['totalSum'] = isset($_SESSION['totalSum']) ? $_SESSION['totalSum'] + $product->price * $valueInp : $product->price * $valueInp;
     }
 
     public function cartAction(){
@@ -96,16 +100,17 @@ class CartController extends AppController {
     public function deletecartAction(){
         $this->layout = 'empty';
         $id = $_POST['id'];
-        @$_SESSION['total.Quantity'] -= $_SESSION['cart'][$id]['quantity'];
-        @$_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
+        
+        $_SESSION['total.Quantity'] -= $_SESSION['cart'][$id]['quantity'];
+        $_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
         unset($_SESSION['cart'][$id]);
     }
 
     public function deleteidAction(){
         $this->layout = 'empty';
         $id = $_POST['id'];
-        @$_SESSION['total.Quantity'] -= $_SESSION['cart'][$id]['quantity'];
-        @$_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
+        $_SESSION['total.Quantity'] -= $_SESSION['cart'][$id]['quantity'];
+        $_SESSION['totalSum'] -= $_SESSION['cart'][$id]['price'] * $_SESSION['cart'][$id]['quantity'];
         unset($_SESSION['cart'][$id]);
     }
 

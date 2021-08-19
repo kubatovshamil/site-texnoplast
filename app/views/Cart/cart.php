@@ -36,7 +36,7 @@
                                     <a id="cart_buy_minus" class="cart_buy-qnt minusCart cartChange" data-target="#qnt-to-basket">-</a>
                                 </div>
                             </div>
-                            <div class="item-price"><span><?=$item['price']?></span><a class="cart-delete cart-remove"  data-id="<?=$item['id'];?>" href=""><i class="fa fa-trash"></i></a></div>
+                            <div class="item-price"><span><?= ($item['price'])? (String) $item['price'] . " руб С НДС" : "запросить";  ?></span><a class="cart-delete cart-remove"  data-id="<?=$item['id'];?>" href=""><i class="fa fa-trash"></i></a></div>
                         </div>
                     <?php endforeach; ?>
                 </div>

@@ -21,7 +21,6 @@
 </div>
 <?php } ?>
 
-
 <div class="login-register">
     <div class="row">
         <div class="container">
@@ -113,18 +112,9 @@
     });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/56626408" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!--<!-- /Yandex.Metrika counter -->
-
-
 
 <script src="<?=PATH. "/public/js/jquery-3.5.1.min.js"?>"></script>
 <script src="<?=PATH ."/public/assets/js/owl.js"?>"></script>
 <script src="<?=PATH. "/public/js/bootstrap.min.js"?>"></script>
 <script src="<?=PATH. "/public/js/app.js"?>"></script>
-<script src="<?=PATH. "/public/js/formValidation.js"?>"></script><!--<script src="--><?//=PATH. "/public/js/jquery.maskedinput.min.js"?><!--"></script>-->
-<!--<script src="--><?//=PATH.'/public/js/bucket-clean.js'?><!--"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $('#phone').mask("+7 (999) 999-99-99");-->
-<!--    });-->
-<!--</script>-->
+<script src="<?=PATH. "/public/js/formValidation.js"?>"></script>

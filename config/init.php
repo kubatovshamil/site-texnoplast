@@ -11,7 +11,7 @@ define("CONF", ROOT . '/config');
 define("LAYOUT", 'default');
 
 // http://ishop2.loc/public/index.php
-$app_path = "{$_SERVER['HTTP_X_FORWARDED_PROTO']}://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
+$app_path = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
 // http://ishop2.loc/public/
 $app_path = preg_replace("#[^/]+$#", '', $app_path);
 // http://ishop2.loc

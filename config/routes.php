@@ -3,23 +3,21 @@
 use ishop\Router;
 
 //Контакты
-Router::add('^contact$', ['controller' => 'contact', 'action' => 'contact']);
-//о нас
-Router::add('^about$',['controller' => 'about', 'action' => 'about']);
+Router::add('^contact$', ['controller' => 'main', 'action' => 'contact']);
 //страница корзинка
 Router::add('^cart$',['controller' => 'cart', 'action' => 'cart']);
 //страница регистрации
 Router::add('^sign$',['controller' => 'sign', 'action' => 'index']);
 //роут категорий
-Router::add('^subcategory/(?P<alias>[A-Za-z0-9\-\*]+)/?$', ['controller' => 'product', 'action' => 'catalog']);
+Router::add('^subcategory/(?P<alias>[A-Za-z0-9\-\*]+)/?$', ['controller' => 'category', 'action' => 'subcategory']);
 
-Router::add('^category/(?P<alias>[A-Za-z0-9\-\*]+)/?$', ['controller' => 'product', 'action' => 'parent']);
+Router::add('^category/(?P<alias>[A-Za-z0-9\-\*]+)/?$', ['controller' => 'category', 'action' => 'parentcategory']);
 //роут продукта
 Router::add('^product/(?P<alias>[A-Za-z0-9\-\*]+)/?$', ['controller' => 'cart', 'action' => 'product']);
 //роуты для поисковика
-Router::add('search', ['controller' => 'search', 'action' => 'product']);
+Router::add('search', ['controller' => 'main', 'action' => 'search']);
 //роут каталога
-Router::add('^catalog$', ['controller' => 'product', 'action' => 'index']);
+Router::add('^catalog$', ['controller' => 'category', 'action' => 'catalog']);
 
 
 

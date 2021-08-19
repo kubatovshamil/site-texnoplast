@@ -71,8 +71,6 @@ function getCategory(){
     }
     
     return $newCategory;
-
-
 }
 
 

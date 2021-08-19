@@ -62,14 +62,14 @@ class OrderController extends AppController {
         $mail = new PHPMailer(true);
 
             $mail->isSMTP();
-            $mail->Host       = 'smtp.yandex.ru';
+            $mail->Host       = 'smtp.mail.ru';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'info@texnoplastik.ru';
-            $mail->Password   = 'loloshka09';
+            $mail->Username   = 'shamil.kubatov@mail.ru';
+            $mail->Password   = 'loloshka0989';
             $mail->SMTPSecure = 'ssl';
             $mail->Port       = 465;
-            $mail->setFrom('info@texnoplastik.ru');
-            $mail->addAddress('info@texnoplastik.ru');
+            $mail->setFrom('shamil.kubatov@mail.ru');
+            $mail->addAddress('shamil.kubatov@mail.ru');
 
             $mail->isHTML(true);
             ob_start();

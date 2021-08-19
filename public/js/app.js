@@ -64,11 +64,6 @@ if(Number($('.cart-counter').html()) === 0){
 }
 
 
-
-	
-
-
-
 $('.cart_buy-qnt_wrap').on('click', '.plusCart', function (e){
 	e.preventDefault();
 	let plusCart = Number($(this).next().val());
@@ -132,7 +127,6 @@ $('#bucket-add').on('click', function (e) {
 	e.preventDefault();
 	
 	
-	
 	$('.cart-counter').css('visibility', 'visible');
 	var value = $(this).data('name');
 	var inputVal = Number($('#qnt-to-basket').val());
@@ -153,29 +147,20 @@ $('#bucket-add').on('click', function (e) {
 	})
 });
 
-
-$('.cart_buy').on('click', function (e) {
-
+$(".bucket-add").on("click", function(e){
 	e.preventDefault();
 
-	$('.cart-counter').css('visibility', 'visible');
-	if((e.target.className === 'bucket-add' && e.target.tagName === 'A') || e.target.tagName === 'I') {
-		var inputVal = Number(e.currentTarget.childNodes[1].childNodes[3].value);
-		var value = Number(e.currentTarget.childNodes[3].getAttribute('data-name'));
-		
-	setTimeout(function(){
-	    $('.add-bucket-tovar').css('left', '0' + 'px');
-	    setTimeout(function(){
-	    $('.add-bucket-tovar').css('left', '-350' + 'px');
-	},1000);
-	},500);
-	
-		$.ajax({
+	notifyAddCart();
+
+	var id = $(this).data('name');
+	var value = parseInt($(this).prev().find(".input_value").val());
+
+	$.ajax({
 			url: '/cart/add',
 			type: 'GET',
 			data: {
-				data : value,
-				value : inputVal
+				data : id,
+				value : value
 			},
 			success: function (res) {
 				$('.main-cart-box').html(res);
@@ -185,8 +170,19 @@ $('.cart_buy').on('click', function (e) {
 				alert('ERROR');
 			}
 		})
-	}
 });
+
+
+function notifyAddCart(){
+	$('.cart-counter').css('visibility', 'visible');
+
+	setTimeout(function(){
+	    $('.add-bucket-tovar').css('left', '0' + 'px');
+	    setTimeout(function(){
+	    $('.add-bucket-tovar').css('left', '-350' + 'px');
+	},1000);	
+	},500);
+}
 
 $('.main-cart-box').on('click', '.del-icone', function (e){
 
