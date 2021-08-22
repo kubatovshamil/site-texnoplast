@@ -43,4 +43,8 @@ class MainController extends AppController {
         }
     }
 
+	/**
+	 */
+	function __construct() {
+	}
 }
