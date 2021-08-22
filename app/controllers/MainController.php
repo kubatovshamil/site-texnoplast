@@ -9,7 +9,6 @@ use app\models\Category;
 class MainController extends AppController {
 
     public function indexAction(){
-        //Внес вот этот комментарий
         $product = Product::getAllById();
 
         $shares = Product::getShareById();
@@ -44,8 +43,4 @@ class MainController extends AppController {
         }
     }
 
-	/**
-	 */
-	function __construct() {
-	}
 }
