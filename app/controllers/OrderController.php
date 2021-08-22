@@ -57,29 +57,29 @@ class OrderController extends AppController {
 
         $mail = new PHPMailer(true);
 
-            $mail->isSMTP();
-            $mail->Host       = App::$app->getProperty("smtp_host");
-            $mail->SMTPAuth   = true;
-            $mail->Username   = App::$app->getProperty("mail_login");
-            $mail->Password   = App::$app->getProperty("mail_pw");
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = 465;
-            $mail->setFrom('shamil.kubatov@mail.ru');
-            $mail->addAddress('shamil.kubatov@mail.ru');
+          $mail->isSMTP();
+          $mail->Host       = App::$app->getProperty("smtp_host");
+          $mail->SMTPAuth   = true;
+          $mail->Username   = App::$app->getProperty("mail_login");
+          $mail->Password   = App::$app->getProperty("mail_pw");
+          $mail->SMTPSecure = 'ssl';
+          $mail->Port       = 465;
+          $mail->setFrom('shamil.kubatov@mail.ru');
+          $mail->addAddress('shamil.kubatov@mail.ru');
 
-            $mail->isHTML(true);
-            ob_start();
-            require_once APP . '/views/mail/mail.php';
-            $body = ob_get_clean();
-            $mail->Subject = 'Заказ номер ' . $order_id->id;
-            $mail->Body    = $body;
-            $mail->CharSet = 'UTF-8';
-            $mail->send();
-            $order_id = $order_id->id;
-            $this->set('order_id');
-            unset($_SESSION['cart']);
-            unset($_SESSION['total.Quantity']);
-            unset($_SESSION['totalSum']);
+          $mail->isHTML(true);
+          ob_start();
+          require_once APP . '/views/mail/mail.php';
+          $body = ob_get_clean();
+          $mail->Subject = 'Заказ номер ' . $order_id->id;
+          $mail->Body    = $body;
+          $mail->CharSet = 'UTF-8';
+          $mail->send();
+          $order_id = $order_id->id;
+          $this->set('order_id');
+          unset($_SESSION['cart']);
+          unset($_SESSION['total.Quantity']);
+          unset($_SESSION['totalSum']);
     }
 
 }
