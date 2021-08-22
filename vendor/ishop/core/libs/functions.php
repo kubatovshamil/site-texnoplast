@@ -42,7 +42,7 @@ function cheackFiles($arr, $type){
 
 function getCategory(){
     $parent = \R::findAll('parent_category');
-    
+
     $arr = [];
     foreach($parent as $k => $v){
         $arr[$k] = [
@@ -50,7 +50,7 @@ function getCategory(){
             'parent_link' => $v->parent_link
         ];
     }
-    
+
     $category = \R::findAll('category');
     $newCategory = [];
     foreach($arr as $k => $v){
@@ -69,11 +69,6 @@ function getCategory(){
             }
         }
     }
-    
+
     return $newCategory;
 }
-
-
-
-
-

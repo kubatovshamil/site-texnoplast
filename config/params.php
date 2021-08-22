@@ -1,11 +1,10 @@
 <?php
 
 return [
-    'admin_email' => 'admin@mail.com',
-    'shop_name' => 'Магазин texnoplastik',
+    'admin_email' => 'info@texnoplastik.ru',
+    'shop_name' => 'Магазин Texnoplastik',
     'pagination' => 3,
-    'smtp_login' => '',
-    'smtp_password' => '',
-    'mail_login'=>'',
-    'mail_pw' => '',
+    'smtp_host' => 'smtp.mail.ru',
+    'mail_login'=>'shamil.kubatov@mail.ru',
+    'mail_pw' => 'loloshka0989',
 ];

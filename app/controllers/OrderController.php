@@ -5,25 +5,28 @@ namespace app\controllers;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+use ishop\App;
 
 class OrderController extends AppController {
 
 
-    public function setOrder($order){
-      $order->fullname = $fullname;
-      $order->phone = $phone;
-      $order->email = $email;
-      $order->country = $country;
-      $order->zipcode = $index;
-      $order->city = $city;
-      $order->street = $street;
-      $order->building = $building;
-      $order->room = $room;
-      if(!empty($address)){
-      $order->address = $address;
+
+    public function setOrder($order, $data){
+      $order->fullname = $data['fullname'];
+      $order->phone = $data['phone'];
+      $order->email = $data['email'];
+      $order->country = $data['country'];
+      $order->zipcode = $data['index'];
+      $order->city = $data['city'];
+      $order->street = $data['street'];
+      $order->building = $data['building'];
+      $order->room = $data['room'];
+      if(!empty($data['address'])){
+        $order->address = $data['address'];
       }
+
       $order->sum = $_SESSION['totalSum'];
-      $order->date = $data;
+      $order->date = date('Y-m-d h:i:s');
       \R::store($order);
     }
 
@@ -32,22 +35,10 @@ class OrderController extends AppController {
             header("Location: /");
             die();
         }
-
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $country = $_POST['country'];
-        $index = $_POST['index'];
-        $city = $_POST['city'];
-        $street = $_POST['street'];
-        $delivery = $_POST['delivery'];
-        $building = $_POST['building'];
-        $room = $_POST['room'];
-        $data = date('Y-m-d h:i:s');
         $order = \R::dispense('orders');
-        $this->setOrder($order);
+        $this->setOrder($order, $_POST);
 
-        $order_id = \R::findOne('orders', 'fullname = ? and phone = ? and email = ? and date = ?',[$fullname, $phone, $email, $data]);
+        $order_id = \R::findOne('orders', 'fullname = ? and phone = ? and email = ? and date = ?',[$_POST['fullname'], $_POST['phone'], $_POST['email'], date('Y-m-d h:i:s')]);
         \R::ext('xdispence', function ($table_name){
             return \R::getRedBean()->dispense($table_name);
         });
@@ -67,14 +58,14 @@ class OrderController extends AppController {
         $mail = new PHPMailer(true);
 
             $mail->isSMTP();
-            $mail->Host       = 'smtp.mail.ru';
+            $mail->Host       = App::$app->getProperty("smtp_host");
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'your_mail@mail.ru';
-            $mail->Password   = 'your_pw';
+            $mail->Username   = App::$app->getProperty("mail_login");
+            $mail->Password   = App::$app->getProperty("mail_pw");
             $mail->SMTPSecure = 'ssl';
             $mail->Port       = 465;
-            $mail->setFrom('your_mail@mail.ru');
-            $mail->addAddress('your_mail@mail.ru');
+            $mail->setFrom('shamil.kubatov@mail.ru');
+            $mail->addAddress('shamil.kubatov@mail.ru');
 
             $mail->isHTML(true);
             ob_start();

@@ -9,7 +9,6 @@ use app\models\Category;
 class MainController extends AppController {
 
     public function indexAction(){
-
         $product = Product::getAllById();
 
         $shares = Product::getShareById();
