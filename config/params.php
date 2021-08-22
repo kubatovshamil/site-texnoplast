@@ -8,3 +8,6 @@ return [
     'mail_login'=>'shamil.kubatov@mail.ru',
     'mail_pw' => 'loloshka0989',
 ];
+
+
+//smtp.mail.ru - мэйл ру, smtp.yandex.ru - яндекс

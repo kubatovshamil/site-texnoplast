@@ -9,12 +9,12 @@
 </head>
 <body>
 
-<h5>ФИО: <?=$fullname?> <br></h5>
-<p>E-mail: <a href="<?=$email?>"><?=$email?></a></p>
-<p>Страна : <?=$country?></p>
-<p>По адрессу : <?= $city . ' '. $street . ' №' . $building . ' ' . $room  . 'почтовой индекс ' . $index?></p>
-<p>Способ доставки: <?=$delivery?></p>
-<p>Номер телефона : <?=$phone?></p>
+<h5>ФИО: <?=$_POST['fullname']?> <br></h5>
+<p>E-mail: <a href="<?=$_POST['email']?>"><?=$_POST['email']?></a></p>
+<p>Страна : <?=$_POST['country']?></p>
+<p>По адрессу : <?= $_POST['city'] . ' '. $_POST['street'] . ' №' . $_POST['building'] . ' ' . $_POST['room']  . 'почтовой индекс ' . $_POST['index']?></p>
+<p>Способ доставки: <?=$_POST['delivery']?></p>
+<p>Номер телефона : <?=$_POST['phone']?></p>
 
 <table style="border: 1px solid #ddd; border-collapse: collapse; width: 100%;">
     <thead>
@@ -30,13 +30,13 @@
         <tr>
             <td style="padding: 8px; border: 1px solid #ddd;"><?=$item['title'] ?></td>
             <td style="padding: 8px; border: 1px solid #ddd;"><?=$item['quantity'] ?></td>
-            <td style="padding: 8px; border: 1px solid #ddd;"><?=$item['price'] ?></td>
-            <td style="padding: 8px; border: 1px solid #ddd;"><?=floatval(preg_replace('/[^0-9]/', '', $item['price'])) * $item['quantity'] ?></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><?=$item['price'] ?> руб с НДС</td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><?=floatval(preg_replace('/[^0-9]/', '', $item['price'])) * $item['quantity'] ?> руб С НДС</td>
         </tr>
     <?php endforeach;?>
     <tr>
         <td colspan="3" style="padding: 8px; border: 1px solid #ddd;">Итого:</td>
-        <td style="padding: 8px; border: 1px solid #ddd;"><?=$_SESSION['totalSum'] ?></td>
+        <td style="padding: 8px; border: 1px solid #ddd;"><?=$_SESSION['totalSum'] ?> руб с НДС</td>
     </tr>
     </tbody>
 </table>
