@@ -24,16 +24,19 @@ class MainController extends AppController{
                 exit();
             }
         }
+
+        if(isset($_SESSION['admin'])){
+            header("Location: /admin/admin-panel/create");
+        }
+
     }
 
     public function adminoutAction(){
         setcookie('user', $_SESSION['user'], -(time() + (86400 * 30)));
         $_SESSION = array();
+        unset($_SESSION['admin']);
         session_destroy();
         header("Location:/admin");
     }
-
-
-
 
 }

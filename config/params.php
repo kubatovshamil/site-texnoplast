@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin_email' => 'info@texnoplastik.ru',
+    'admin_email' => 'shamil.kubatov@mail.ru',
     'shop_name' => 'Магазин Texnoplastik',
     'pagination' => 3,
     'smtp_host' => 'smtp.mail.ru',
@@ -10,6 +10,5 @@ return [
     'mail_login'=>'shamil.kubatov@mail.ru',
     'mail_pw' => 'loloshka0989',
 ];
-
 
 //smtp.mail.ru - мэйл ру, smtp.yandex.ru - яндекс

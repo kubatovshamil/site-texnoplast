@@ -1,14 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12" style="margin-top: 10px;">
-            <a class="btn btn-dark" href="/admin/main/adminout">Выйти из админки</a>
-            <a style="float: right" class="btn btn-success" href="/admin/admin-panel/view">Посмотреть товары сайта</a>
-            <h2 class="form__title" style="text-align: center">Форма добавление товара</h2>
+            <a class="btn btn-dark" style="float: right" href="/admin/main/adminout">Выйти из админки</a>            <h2 class="form__title" style="text-align: center">Форма добавление товара</h2>
             <div class="sign-up">
                 <form action="/admin/admin-panel/create" enctype="multipart/form-data" class="form-add" method="post" style="width: 500px;margin: auto;padding-bottom: 20px;">
                     <?php if($category){ ?>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Категория</label>
+                        <label for="exampleInputEmail1">Категории</label>
                         <div class="block-new">
                             <select id="category_select" style="display: block;width: 500px;padding: 5px;border-radius: 9px" name="select" id="">
                                <?php foreach ($category as $cat){ ?>
